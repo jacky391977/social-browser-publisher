@@ -1,0 +1,4 @@
+interface:
+  display_name: "Social Browser Publisher"
+  short_description: "安全使用 Chrome 發佈到 IG、Facebook 與 Threads"
+  default_prompt: "Use $social-browser-publisher to preview this post, verify the visible account in Chrome, and publish only after my explicit approval."
