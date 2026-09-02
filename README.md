@@ -12,6 +12,13 @@
 
 這個最終版已整合舊 `social-post` 的泛用語氣學習與內容策略概念，但**不包含任何人的私人 `style_profile.md`、固定作者語氣、帳號資料或實戰數據**。每位學員安裝後都要用自己的貼文建立獨立語氣設定檔。
 
+## 學員使用手冊
+
+- [GitHub 完整繁體中文手冊](social-browser-publisher/USER_GUIDE.zh-TW.md)
+- [Notion 線上閱讀版](https://app.notion.com/p/3cf4e6997823811b9fe8ce35b7b9989c?pvs=204)
+
+手冊包含完整功能說明、安全與隱私設計、安裝設定、個人語氣訓練、熱門內容搜尋、三平台文案、圖片小卡、dry run、正式發佈與常見問題排除。
+
 ## 安全原則
 
 - 不要求或保存帳號密碼、2FA、Cookie、Token 或 Chrome Profile 資料。
