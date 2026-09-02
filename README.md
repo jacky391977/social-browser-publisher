@@ -37,7 +37,7 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 1. 在 Chrome 網址列開啟 `chrome://extensions/`。
 2. 找到 ChatGPT 瀏覽器擴充功能，點選「詳細資料」。
 3. 開啟「允許存取檔案網址」（Allow access to file URLs）。
-4. 回到 Codex，告訴它權限已開啟，再重試上傳。
+4. 回到 Codex，告訴它權限已開啟，並重新開始一次 Chrome 發佈任務；不要沿用開啟權限前的檔案選擇視窗。
 
 這項權限只用於選取你已同意上傳的本機檔案；純文字 Threads 貼文不需要。Codex 不會代替使用者修改擴充功能權限，也不會要求帳號密碼。官方說明：[Chrome extension file uploads](https://developers.openai.com/codex/app/chrome-extension#upload-files)。
 

@@ -38,11 +38,11 @@ This one-time setting is required when Codex needs to upload a local image or vi
 1. In Chrome, open `chrome://extensions/`.
 2. Find the ChatGPT browser extension and click **Details** (`詳細資料`).
 3. Turn on **Allow access to file URLs** (`允許存取檔案網址`).
-4. Return to Codex and confirm that the setting is enabled before retrying the upload.
+4. Return to Codex, confirm that the setting is enabled, and start the Chrome publishing task again. Do not continue from a file chooser that was opened before the permission change.
 
 Official setup reference: [Chrome extension file uploads](https://developers.openai.com/codex/app/chrome-extension#upload-files).
 
-Codex must not change this permission automatically. If it is disabled, stop before uploading or publishing and ask the user to enable it in Chrome. Never ask for account credentials as a workaround.
+Codex must not change this permission automatically. If it is disabled, stop before uploading or publishing and ask the user to enable it in Chrome. After the user confirms, begin a new Chrome task before retrying. Never ask for account credentials as a workaround.
 
 ## Secret handling
 

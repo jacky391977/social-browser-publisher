@@ -42,7 +42,7 @@ Never interpret scheduling approval, a general preference such as "以後都直�
 
 - Inspect the visible page and use accessible labels/roles where possible; platform UI and wording change often.
 - Upload only user-provided or user-authorized local media. Confirm order when multiple files are present.
-- If Chrome reports that file upload is disabled, do not request credentials or work around the restriction. Point the user to the **Chrome file upload permission** section in [references/setup-and-security.md](references/setup-and-security.md), then wait for them to confirm that it is enabled.
+- If Chrome reports that file upload is disabled, do not request credentials or work around the restriction. Point the user to the **Chrome file upload permission** section in [references/setup-and-security.md](references/setup-and-security.md), then wait for them to confirm that it is enabled. Start a new Chrome publishing task after the setting changes; do not reuse the file chooser opened before the change.
 - Do not access Chrome's password manager, profile directories, cookies, local storage, developer tools, or network tokens.
 - If an upload or publish state is ambiguous, inspect the resulting feed/profile and visible confirmation. Do not click Publish again until duplication is ruled out.
 - Stop after one bounded retry per platform. Report the failure instead of repeatedly posting.
