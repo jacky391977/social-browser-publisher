@@ -31,6 +31,19 @@ The configuration is optional. When an expected destination is blank, ask the us
 
 Do not create, copy, rename, inspect, or launch Chrome profile directories. The user controls profiles through Chrome UI.
 
+## Chrome file upload permission
+
+This one-time setting is required when Codex needs to upload a local image or video to Instagram or Facebook. Text-only Threads posts do not require it.
+
+1. In Chrome, open `chrome://extensions/`.
+2. Find the ChatGPT browser extension and click **Details** (`詳細資料`).
+3. Turn on **Allow access to file URLs** (`允許存取檔案網址`).
+4. Return to Codex and confirm that the setting is enabled before retrying the upload.
+
+Official setup reference: [Chrome extension file uploads](https://developers.openai.com/codex/app/chrome-extension#upload-files).
+
+Codex must not change this permission automatically. If it is disabled, stop before uploading or publishing and ask the user to enable it in Chrome. Never ask for account credentials as a workaround.
+
 ## Secret handling
 
 Do not place these in the repository, Skill folder, config, logs, screenshots, or chat output:

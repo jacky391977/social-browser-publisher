@@ -11,6 +11,7 @@ Publish through the user's visible, already signed-in Chrome session. Never ask 
 
 - Use the installed Chrome browser-control capability and follow its instructions before browser work.
 - If Chrome control is unavailable, stop and explain that the user must install/enable the Codex Chrome extension under **Settings → Computer use**. Do not substitute another browser when the user requested Chrome.
+- Before uploading local images or videos, ensure the user has completed the Chrome file-upload permission steps in [references/setup-and-security.md](references/setup-and-security.md). If file upload is unavailable, stop before posting and guide the user through that setup. Never change browser-extension permissions on the user's behalf.
 - Use the platform websites only: `instagram.com`, `facebook.com`, and `threads.net`.
 - Keep normal human posting frequency. This skill is not for scraping, engagement bots, bulk posting, unsolicited messaging, or bypassing platform safeguards.
 
@@ -41,6 +42,7 @@ Never interpret scheduling approval, a general preference such as "以後都直�
 
 - Inspect the visible page and use accessible labels/roles where possible; platform UI and wording change often.
 - Upload only user-provided or user-authorized local media. Confirm order when multiple files are present.
+- If Chrome reports that file upload is disabled, do not request credentials or work around the restriction. Point the user to the **Chrome file upload permission** section in [references/setup-and-security.md](references/setup-and-security.md), then wait for them to confirm that it is enabled.
 - Do not access Chrome's password manager, profile directories, cookies, local storage, developer tools, or network tokens.
 - If an upload or publish state is ambiguous, inspect the resulting feed/profile and visible confirmation. Do not click Publish again until duplication is ruled out.
 - Stop after one bounded retry per platform. Report the failure instead of repeatedly posting.
