@@ -37,4 +37,3 @@ The plan is a draft, not authorization to publish. Every actual batch still need
 - Record only metrics the user provides or authorizes Codex to read from visible insights.
 
 Use findings to adjust the next plan modestly. Preserve the user's voice and business constraints instead of chasing a single high-performing outlier.
-

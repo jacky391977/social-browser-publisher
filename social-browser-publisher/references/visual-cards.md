@@ -29,4 +29,3 @@ Display the actual generated image to the user together with the caption and des
 During Instagram crop, select the intended ratio (normally 4:5 for a 1080 × 1350 card) and visually confirm that no headline, logo, or footer is cut off. Preserve original colors unless the user asks for a filter.
 
 If the platform presents an AI-content label, do not toggle it blindly. Inspect the current explanation and apply it when required for the actual content or when the user requests it.
-

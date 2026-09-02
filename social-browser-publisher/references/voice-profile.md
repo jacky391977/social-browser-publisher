@@ -79,4 +79,3 @@ After training:
 4. Apply corrections under `## User corrections`; user corrections override statistical patterns.
 
 If the user says the sample is not recognizable, do not publish with that profile. Refresh the analysis or draft neutrally.
-

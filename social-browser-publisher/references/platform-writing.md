@@ -40,4 +40,3 @@ Before previewing, ask:
 2. Did every platform version preserve the same approved facts?
 3. Did any unapproved personal story, promise, link, tag, or destination appear?
 4. Would removing the profile-specific traits make it generic? If yes, restore only traits supported by the profile.
-
