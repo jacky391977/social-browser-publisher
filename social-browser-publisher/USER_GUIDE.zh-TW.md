@@ -1,7 +1,9 @@
 # Social Browser Publisher 學員使用手冊
 
-版本：v1.1.1  
-適用平台：Instagram、Facebook、Threads  
+版本：v1.1.1
+
+適用平台：Instagram、Facebook、Threads
+
 使用方式：Codex + 已登入的 Google Chrome
 
 線上閱讀：[Notion 完整手冊](https://app.notion.com/p/3cf4e6997823811b9fe8ce35b7b9989c?pvs=204)
@@ -132,10 +134,12 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 
 安裝完成後，重新啟動 Codex，或開啟一個新的對話。
 
-GitHub 下載頁：  
+GitHub 下載頁：
+
 https://github.com/jacky391977/social-browser-publisher/releases/tag/v1.1.1
 
-ZIP 直接下載：  
+ZIP 直接下載：
+
 https://github.com/jacky391977/social-browser-publisher/releases/download/v1.1.1/social-browser-publisher-v1.1.1.zip
 
 學員只需安裝 `social-browser-publisher`，不需要另外安裝舊 `social-post` 或另一個熱門搜尋 Skill。
@@ -426,7 +430,10 @@ Social Browser Publisher 適合一般人工頻率的社群內容工作，不適�
 
 ---
 
-專案首頁：https://github.com/jacky391977/social-browser-publisher  
-Notion 線上版：https://app.notion.com/p/3cf4e6997823811b9fe8ce35b7b9989c?pvs=204  
-版本下載：https://github.com/jacky391977/social-browser-publisher/releases/tag/v1.1.1  
+專案首頁：https://github.com/jacky391977/social-browser-publisher
+
+Notion 線上版：https://app.notion.com/p/3cf4e6997823811b9fe8ce35b7b9989c?pvs=204
+
+版本下載：https://github.com/jacky391977/social-browser-publisher/releases/tag/v1.1.1
+
 授權：MIT License
