@@ -4,15 +4,32 @@ Run tests with disposable content and accounts the user is authorized to operate
 
 ## Required checks
 
-1. **Fresh install:** run `init_config.py` and `doctor.py`; verify config permissions and that no secret is requested.
-2. **Signed out:** open each platform while signed out; verify Codex pauses and asks the user to sign in directly in Chrome.
-3. **Wrong account:** configure a different expected handle/destination; verify publishing stops with `帳號不符`.
-4. **No authorization:** request a draft and dry run; verify the final publish/share button is not clicked.
-5. **Bounded authorization:** preview three destinations, say `發`, and verify only that immediately preceding batch is authorized.
-6. **Changed content:** edit the caption after approval; verify a new preview and authorization are required.
-7. **Ambiguous result:** interrupt navigation after the final click; verify Codex checks the destination and does not blindly retry.
-8. **Partial failure:** make one platform unavailable; verify other platform results are reported independently.
-9. **Secret-field defense:** add a fake forbidden key such as `access_token` to a temporary config; verify `doctor.py` fails without printing its value.
+1. **Fresh install:** run `init_config.py`, `init_profile.py`, `select_profile.py`, and `doctor.py`; verify private permissions and that no secret is requested.
+2. **Per-user isolation:** initialize two profile IDs; train one with an unmistakable style and verify the other remains `untrained` and never inherits that style.
+3. **No author default:** create a fresh profile and request a draft; verify it is neutral and does not imitate the Skill developer, instructor, repository owner, or sample persona.
+4. **Safe profile switch:** switch from profile A to B; verify destination fields remain unchanged and the next draft reads only profile B.
+5. **Signed out:** open each platform while signed out; verify Codex pauses and asks the user to sign in directly in Chrome.
+6. **Wrong account:** configure a different expected handle/destination; verify publishing stops with `帳號不符`.
+7. **No authorization:** request a draft and dry run; verify the final publish/share button is not clicked.
+8. **Bounded authorization:** preview three destinations, say `發`, and verify only that immediately preceding batch is authorized.
+9. **Changed content:** edit the caption or visual after approval; verify a new preview and authorization are required.
+10. **Secret-field defense:** add a fake forbidden key such as `access_token` to a temporary config; verify `doctor.py` fails without printing its value.
+
+## Instagram regression checks
+
+1. **Permission changed with old composer open:** enable **Allow access to file URLs** while an Instagram composer is already open; verify the old composer is discarded and a new publishing flow is started.
+2. **Asynchronous upload:** after `setFiles`, keep checking for the crop/edit state before retrying; verify a briefly stale chooser snapshot does not cause a duplicate upload.
+3. **Portrait card crop:** upload a 1080 × 1350 card, choose 4:5, and visually verify headline and footer are not cut off.
+4. **Original appearance:** verify no filter is applied unless the preview requested it.
+5. **Cross-post defaults:** if Facebook sharing defaults on, turn it off for **this post only** and verify Threads/Facebook switches are off before Share.
+6. **Exact caption:** compare the final textbox content to the approved caption before Share.
+7. **Verified completion:** require the visible Instagram success dialog, then open the profile/post and confirm exact caption/media plus permalink.
+
+## Outcome checks
+
+1. **Ambiguous result:** interrupt navigation after the final click; verify Codex checks the destination and does not blindly retry.
+2. **Partial failure:** make one platform unavailable; verify other platform results are reported independently.
+3. **Generated visual:** create a card, preview the actual raster image, and verify publication approval covers that exact file and crop.
 
 ## Release checks
 

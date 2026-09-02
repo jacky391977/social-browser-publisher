@@ -1,53 +1,70 @@
 ---
 name: social-browser-publisher
-description: Draft, preview, and publish user-approved posts to Instagram, Facebook, and Threads through the user's already signed-in Chrome browser. Use when the user asks Codex to prepare or post social content through browser UI; do not use for API-based or high-volume automation.
+description: Learn each user's own social writing voice from user-provided or explicitly authorized samples, plan and draft platform-specific content, create optional image cards, and safely preview or publish through the user's signed-in Chrome to Instagram, Facebook, and Threads. Use for social style learning, post drafting, content calendars, image-card posts, dry runs, publishing, and performance reviews; not for bulk engagement automation or API-based mass posting.
 ---
 
 # Social Browser Publisher
 
-Publish through the user's visible, already signed-in Chrome session. Never ask for, read, store, export, or transmit passwords, one-time codes, cookies, browser profiles, local storage, session data, or access tokens.
+Provide one end-to-end social workflow: learn the current user's voice, create platform-specific content and visuals, preview the exact result, then publish only the approved batch through the user's visible signed-in Chrome session.
 
-## Requirements
+Never ask for, read, store, export, or transmit passwords, one-time codes, cookies, browser profiles, local storage, session data, or access tokens.
 
-- Use the installed Chrome browser-control capability and follow its instructions before browser work.
-- If Chrome control is unavailable, stop and explain that the user must install/enable the Codex Chrome extension under **Settings → Computer use**. Do not substitute another browser when the user requested Chrome.
-- Before uploading local images or videos, ensure the user has completed the Chrome file-upload permission steps in [references/setup-and-security.md](references/setup-and-security.md). If file upload is unavailable, stop before posting and guide the user through that setup. Never change browser-extension permissions on the user's behalf.
-- Use the platform websites only: `instagram.com`, `facebook.com`, and `threads.net`.
-- Keep normal human posting frequency. This skill is not for scraping, engagement bots, bulk posting, unsolicited messaging, or bypassing platform safeguards.
+## Non-negotiable identity rule
+
+There is no built-in author voice. Never imitate this Skill's developer, instructor, examples, or another user.
+
+- Learn only from posts that the current user supplies or explicitly authorizes Codex to read from a specified account.
+- Keep every user's voice profile separate under `~/.config/codex-social-publisher/profiles/<profile-id>/`.
+- Do not copy a profile, samples, content plan, brand data, or results into the Skill folder, repository, release ZIP, chat with another user, or another profile.
+- If no trained profile exists, write a neutral draft and say that voice matching has not been trained. Do not invent a personal style.
+
+For learning or changing a voice, read [references/voice-profile.md](references/voice-profile.md).
 
 ## Route the request
 
-Choose one mode from the user's wording:
+Choose only the references needed for the current mode:
 
-- **Setup / doctor:** read [references/setup-and-security.md](references/setup-and-security.md), run the local helpers, then inspect the requested platform login state without posting.
-- **Draft / preview:** prepare platform-specific content and show the exact destination, text, media order, and any first comment. Do not open a composer unless useful to the requested preview.
-- **Dry run:** follow the complete browser flow only up to the final publish/share button. Do not click it.
-- **Publish:** read [references/browser-publishing.md](references/browser-publishing.md) and follow the confirmation boundary below.
-- **Testing or maintenance:** read [references/test-cases.md](references/test-cases.md).
+- **Setup / doctor:** read [references/setup-and-security.md](references/setup-and-security.md), run the local helpers, and inspect requested platform login state without posting.
+- **Learn / refresh voice:** read [references/voice-profile.md](references/voice-profile.md). Obtain source authorization before browser reading.
+- **Content calendar / strategy:** read [references/content-strategy.md](references/content-strategy.md). Use the active user's goals and results, not universal viral formulas.
+- **Draft / rewrite / preview:** read the active private voice profile and [references/platform-writing.md](references/platform-writing.md). Produce a distinct version for each requested platform.
+- **Image card / visual post:** also read [references/visual-cards.md](references/visual-cards.md). Preview the actual image before upload.
+- **Dry run / publish:** read [references/browser-publishing.md](references/browser-publishing.md) and follow the confirmation boundary below.
+- **Performance review:** read [references/content-strategy.md](references/content-strategy.md) and compare against that user's own baseline.
+- **Testing or release:** read [references/test-cases.md](references/test-cases.md).
+
+Tell the user which mode is running in one short sentence when it changes what data or browser access is needed.
+
+## Requirements
+
+- For Chrome work, use the installed Chrome browser-control capability and follow its current instructions.
+- If Chrome control is unavailable, stop and explain that the user must install or enable the ChatGPT Chrome extension under **Settings → Computer use**. Do not substitute another browser when the user requested Chrome.
+- Before uploading local images or videos, require the one-time Chrome file-upload setup in [references/setup-and-security.md](references/setup-and-security.md).
+- Use only the requested platform websites: `instagram.com`, `facebook.com`, and `threads.com`/`threads.net`.
+- Keep normal human posting frequency. Do not scrape at scale, auto-like, auto-follow, bulk comment, send unsolicited messages, or bypass platform safeguards.
 
 ## Confirmation boundary
 
-Treat publishing as an external side effect requiring fresh, batch-specific authorization.
+Treat every publish as a bounded external side effect.
 
-1. Resolve the requested platforms, destination account/page, exact text, and media files.
-2. Present a concise final preview for every platform. Clearly say that nothing has been published yet.
-3. Ask for explicit authorization unless the user's current message already clearly authorizes publishing this exact preview. A standalone `發`, `發布`, or `確認發佈` authorizes only the immediately preceding previewed batch.
-4. Before each final click, verify from visible page UI that the signed-in account or selected Facebook destination matches the preview. If identity cannot be verified, stop that platform.
-5. After authorization, do not silently rewrite the caption, swap media, add platforms, change the destination, or publish a second batch. Material changes require a new preview and authorization.
-6. Captcha, two-factor prompts, login forms, suspicious-login checks, consent dialogs, and account switching must be completed by the user. Pause and ask them to finish in Chrome, then tell you when it is ready.
+1. Resolve the requested platforms, visible destination account/page, exact text, media files and order, crop, accessibility text if requested, and all cross-post toggles.
+2. Show a concise final preview per platform and clearly state that nothing has been published yet.
+3. Obtain explicit batch-specific authorization unless the current message already clearly authorizes that exact preview. A standalone `發`, `發布`, or `確認發佈` applies only to the immediately preceding previewed batch.
+4. Before every final click, verify the visible signed-in identity and ensure unrequested Threads/Facebook/Instagram cross-post toggles are off.
+5. Do not silently rewrite text, swap media, add destinations, change crop, enable a cross-post, or publish another batch after approval. Material changes require a new preview and authorization.
+6. Captcha, two-factor prompts, login forms, suspicious-login checks, consent dialogs, and account switching are user actions. Pause and ask the user to complete them directly in Chrome.
 
-Never interpret scheduling approval, a general preference such as "以後都直接發", or approval for one platform as authorization for another platform or future post.
+Scheduling approval, a standing preference such as "以後都直接發", or approval for one platform never authorizes another platform or future batch.
 
-## Browser execution
+## Browser execution invariants
 
-- Inspect the visible page and use accessible labels/roles where possible; platform UI and wording change often.
-- Upload only user-provided or user-authorized local media. Confirm order when multiple files are present.
-- If Chrome reports that file upload is disabled, do not request credentials or work around the restriction. Point the user to the **Chrome file upload permission** section in [references/setup-and-security.md](references/setup-and-security.md), then wait for them to confirm that it is enabled. Start a new Chrome publishing task after the setting changes; do not reuse the file chooser opened before the change.
-- Do not access Chrome's password manager, profile directories, cookies, local storage, developer tools, or network tokens.
-- If an upload or publish state is ambiguous, inspect the resulting feed/profile and visible confirmation. Do not click Publish again until duplication is ruled out.
-- Stop after one bounded retry per platform. Report the failure instead of repeatedly posting.
-- Handle platforms independently: one failure does not imply success or authorization to duplicate posts elsewhere.
+- Inspect the current visible page and use current accessible labels/roles; social UIs change often.
+- Upload only user-provided or user-approved media from an exact local path.
+- Do not access Chrome's password manager, profile directories, cookies, local storage, developer tokens, or browsing history.
+- A successful button click is not proof of publication. Require a visible success state and verify the resulting profile/post when possible.
+- If an outcome is ambiguous, inspect the destination once and do not click Publish again until duplication is ruled out.
+- Stop after one bounded retry per platform. Report partial results independently.
 
 ## Completion report
 
-Return one status per requested platform: `已發布`, `未發布`, `需登入`, `帳號不符`, or `失敗／狀態不明`. Include the visible destination and a post URL only when it can be obtained from the resulting UI. Never claim success from a button click alone when no visible success state or resulting post was verified.
+Return one status per requested platform: `已發布`, `未發布`, `需登入`, `帳號不符`, or `失敗／狀態不明`. Include the visible destination and a resulting post URL only after verification. State whether any cross-post destinations were intentionally left off.

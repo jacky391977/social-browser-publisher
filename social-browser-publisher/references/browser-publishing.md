@@ -1,39 +1,74 @@
 # Browser publishing workflow
 
-Read this only for a real publish or dry run. The exact UI can change; rely on current visible labels and page state rather than fixed CSS selectors.
+Read this only for a real publish or dry run. Social UIs change; use current visible labels and the selected Chrome capability's documentation rather than copied CSS selectors.
 
 ## Shared preflight
 
-1. Confirm requested platforms and whether the destination is a personal profile, Page, or other supported surface.
-2. Confirm caption, links, hashtags, mentions, accessibility text if requested, media files, media order, and platform-specific differences.
-3. Confirm local media paths exist before opening composers.
+1. Confirm platforms and whether each destination is a personal profile, Page, group, or other supported surface.
+2. Confirm exact text, links, hashtags, mentions, media paths/order, crop, accessibility text if requested, and cross-post behavior.
+3. Confirm every local media path exists and show the actual visual when newly generated.
 4. Show the exact final preview and obtain authorization as defined in `SKILL.md`.
-5. Open the user's Chrome and inspect login/account state from visible UI.
+5. Inspect login/account state from visible Chrome UI. Never infer identity only from the URL.
 
-For a dry run, execute the same flow but stop with the final publish/share button visible and report `未發布（dry run）`.
+For a dry run, execute the flow only until the final publish/share button is visible and report `未發布（dry run）`.
 
-## Instagram
+## Chrome local-file upload prerequisite
 
-Use Instagram's create-post flow. Verify the visible active account before upload. Upload the authorized image(s) or video, preserve requested order/crop, enter the Instagram caption, and stop before the final Share button if authorization is absent or this is a dry run.
+The ChatGPT Chrome extension must have **Allow access to file URLs** enabled. If the user changes that permission while a composer or file chooser is already open:
 
-After sharing, verify a visible success confirmation or open the resulting post/profile and confirm the new post. Capture the post URL when available.
+1. Close or discard that pre-permission composer without publishing.
+2. Start a fresh Chrome publishing flow.
+3. Open a new composer and a new file chooser.
+
+Do not reuse the old chooser. Do not change extension permissions for the user.
+
+For upload, start the chooser wait before clicking the visible upload control:
+
+```javascript
+const chooserPromise = tab.playwright.waitForEvent("filechooser", { timeoutMs: 10000 });
+await tab.playwright.getByRole("button", { name: "從電腦選擇", exact: true }).click();
+const chooser = await chooserPromise;
+await chooser.setFiles(["/absolute/approved/file.png"]);
+```
+
+Use the current localized label when it differs. Never upload a guessed path.
+
+## Instagram — verified feed-post sequence
+
+1. Verify the visible account handle before opening the composer.
+2. Open a **new feed post** composer. Do not reuse a composer opened before file-upload permission changed.
+3. Upload the exact approved media through the file chooser flow above.
+4. Wait for a visible crop/edit state such as `裁切` or `下一步`. After `setFiles` returns, the DOM may briefly still show the original chooser. Wait and inspect the current state or screenshot before declaring failure or opening another chooser. Do not upload a second time until the first upload is ruled out.
+5. Choose the intended crop. For a 1080 × 1350 portrait card, explicitly select **4:5** and visually verify the headline, image, and footer are all present.
+6. Continue to edit/filter and preserve **Original/原始** unless the preview specified a filter.
+7. On the caption page, verify the visible Instagram handle again and enter the exact approved caption.
+8. Inspect every cross-post switch. Instagram may default Facebook sharing on. Turn off every unrequested destination. If disabling Facebook opens `停止分享到 Facebook？`, choose **不要分享此貼文**; do not choose the global **停止分享所有貼文** unless the user explicitly requests a persistent setting change.
+9. Re-read the exact caption and confirm all unrequested Threads/Facebook switches are off.
+10. For a dry run or absent authorization, stop with **分享** visible. Otherwise click **分享** once.
+11. Wait for a visible success state such as `已分享貼文` and `已分享你的貼文。`.
+12. Open the visible destination profile, confirm the new image and caption, then open the post and capture its permalink. A successful click alone is not completion.
+
+If the outcome remains ambiguous, inspect the profile once for the exact caption/media and do not click Share again.
 
 ## Facebook
 
-Before composing, verify the selected publishing identity and destination. Facebook may default to a personal profile even when a Page was intended. Select the exact configured Page/profile/group from visible UI, then enter the Facebook-specific text and media.
+1. Verify the visible publishing identity and exact profile/Page/group destination.
+2. Open the current post composer and enter the Facebook-specific text and approved media.
+3. Preserve the existing audience unless the user explicitly requests a change.
+4. Inspect any Instagram/Threads/group cross-post options and leave unrequested destinations off.
+5. Stop before the final Post/Publish button for dry run or absent authorization.
+6. After one authorized click, verify a visible success state and the resulting destination post. Capture a permalink when available.
 
-Stop before the final Post button if authorization is absent or this is a dry run. After posting, verify the resulting post in the destination feed and capture its URL when available.
+Facebook may insert an intermediate settings/review screen. Treat the last button that creates or schedules the post as the final side effect; do not assume the first `Continue` is publication.
 
 ## Threads
 
-Verify the visible Threads account, open the new-thread composer, enter the Threads-specific text and authorized media, and stop before the final Post button if authorization is absent or this is a dry run.
+1. Verify the visible Threads account; do not assume it matches the active Instagram account.
+2. Open the new-thread composer and enter the Threads-specific approved text and media.
+3. For a multi-post thread, preview and approve each segment and order before browser entry.
+4. Stop before the final Post button for dry run or absent authorization.
+5. After one authorized click, verify the resulting thread in the visible profile/feed and capture its permalink.
 
-After posting, verify the resulting thread in the profile/feed and capture its URL when available.
+## Ambiguous or partial outcomes
 
-## Ambiguous outcomes
-
-If the browser times out, navigates unexpectedly, or shows no clear success state after the final click:
-
-1. Inspect the current composer and destination profile/feed.
-2. Search only the user's visible recent posts for the exact text/media.
-3. If still unclear, report `失敗／狀態不明` and do not retry automatically.
+Handle platforms independently. If one platform fails after another succeeded, report the successful result and stop the failed platform at its bounded retry limit. Never repost a successful platform just to keep the batch visually aligned.

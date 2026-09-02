@@ -8,19 +8,36 @@ Run:
 
 ```bash
 python3 scripts/init_config.py
+python3 scripts/init_profile.py --profile-id default
+python3 scripts/select_profile.py --profile-id default
 python3 scripts/doctor.py
 ```
 
-The helper stores only non-secret preferences at `~/.config/codex-social-publisher/config.json`. The directory is mode `0700` and the file is mode `0600` on POSIX systems.
+The configuration helper stores only non-secret preferences at `~/.config/codex-social-publisher/config.json`. The directory is mode `0700` and the file is mode `0600` on POSIX systems.
 
 Allowed fields:
 
 - `chrome_profile_label`: a human-readable label only; it is not a filesystem path.
+- `voice_profile_id`: the active private user/brand profile identifier.
 - `instagram.expected_account`: expected visible Instagram handle.
 - `facebook.expected_destination`: expected visible profile, Page, or group name.
 - `threads.expected_account`: expected visible Threads handle.
 
 The configuration is optional. When an expected destination is blank, ask the user to identify the intended account/page before publishing and verify it from visible UI.
+
+## Per-user voice and brand data
+
+Private user-specific files live outside the installed Skill:
+
+```text
+~/.config/codex-social-publisher/profiles/<profile-id>/
+```
+
+Each profile contains `voice-profile.md`, `brand-profile.md`, and `content-plan.md`. Use a separate profile ID for every person or brand. Do not copy these files into the repository, release ZIP, another profile, or another user's chat.
+
+Use `scripts/select_profile.py --profile-id <id>` before drafting or publishing for a different user. It changes only the active profile ID and preserves platform destination settings. Still verify the visible account before every publish.
+
+These files may contain personal writing patterns and business context. Treat them as private user data even though they must never contain passwords, cookies, tokens, or login data.
 
 ## Login setup
 
@@ -38,11 +55,12 @@ This one-time setting is required when Codex needs to upload a local image or vi
 1. In Chrome, open `chrome://extensions/`.
 2. Find the ChatGPT browser extension and click **Details** (`詳細資料`).
 3. Turn on **Allow access to file URLs** (`允許存取檔案網址`).
-4. Return to Codex, confirm that the setting is enabled, and start the Chrome publishing task again. Do not continue from a file chooser that was opened before the permission change.
+4. Close or discard any social composer/file chooser opened before the permission change.
+5. Return to Codex, confirm that the setting is enabled, and start a fresh Chrome publishing task with a new composer.
 
 Official setup reference: [Chrome extension file uploads](https://developers.openai.com/codex/app/chrome-extension#upload-files).
 
-Codex must not change this permission automatically. If it is disabled, stop before uploading or publishing and ask the user to enable it in Chrome. After the user confirms, begin a new Chrome task before retrying. Never ask for account credentials as a workaround.
+Codex must not change this permission automatically. If it is disabled, stop before uploading or publishing and ask the user to enable it in Chrome. After the user confirms, begin a new Chrome task and new composer before retrying. Never ask for account credentials as a workaround.
 
 ## Secret handling
 
@@ -54,4 +72,4 @@ Do not place these in the repository, Skill folder, config, logs, screenshots, o
 - one-time passwords, backup codes, or recovery codes
 - copied browser profile data or login databases
 
-If `doctor.py` reports a forbidden key, stop all publishing. Ask the user to remove that field and rotate the exposed credential if it was real.
+Do not publish or package a user's `voice-profile.md`, `brand-profile.md`, or `content-plan.md`. If `doctor.py` reports a forbidden key, stop publishing. Ask the user to remove that field and rotate the exposed credential if it was real.

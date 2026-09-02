@@ -1,4 +1,4 @@
 interface:
-  display_name: "Social Browser Publisher"
-  short_description: "安全使用 Chrome 發佈到 IG、Facebook 與 Threads"
-  default_prompt: "Use $social-browser-publisher to preview this post, verify the visible account in Chrome, and publish only after my explicit approval."
+  display_name: "Social Post Studio & Publisher"
+  short_description: "學每位使用者自己的語氣、製圖並安全發佈社群貼文"
+  default_prompt: "Use $social-browser-publisher with my active private voice profile to create platform-specific drafts and visuals, preview the exact destinations, and publish only the batch I explicitly approve."
