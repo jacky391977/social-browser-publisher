@@ -3,8 +3,10 @@
 一個可安裝的整合型 Codex Skill，包含：
 
 - 學習**每位使用者自己的語氣**
+- 搜尋近期熱門內容，附來源日期、連結、可信度與限制
 - 14 天內容規劃與成效回顧
 - 分別產生 Instagram、Facebook、Threads 原生文案
+- 依平台加入自然分行分段，發佈前比對空行是否一致
 - 製作與預覽 IG／FB 圖片小卡
 - 使用學員已登入的 Chrome 安全發佈
 
@@ -64,6 +66,8 @@ python3 ~/.codex/skills/social-browser-publisher/scripts/select_profile.py --pro
 
 `select_profile.py` 只切換目前語氣／品牌檔，不會清掉 IG、FB、Threads 目的地設定。實際發文前仍會從 Chrome 可見畫面再次核對帳號。
 
+若從舊版升級，對既有 `profile-id` 再執行一次 `init_profile.py` 即可安全補上 `trend-log.md`；現有語氣、品牌與內容計畫不會被覆寫。
+
 ### 3. 用自己的貼文學語氣
 
 ```text
@@ -75,11 +79,21 @@ python3 ~/.codex/skills/social-browser-publisher/scripts/select_profile.py --pro
 
 ## 使用範例
 
+搜尋近期熱門內容：
+
+```text
+使用 $social-browser-publisher，搜尋最近 7 天水果相關的熱門討論，列出 5 個候選主題、來源日期與連結、可信度和限制。先讓我選角度，不要發布。
+```
+
+熱門搜尋必須使用即時資料，不以模型記憶冒充「近期熱門」。預設提供五個可檢查候選，分成 A／B／C 可信度；若無法直接看到平台證據，會明確標為網路／新聞熱度。Skill 只提取事實與討論張力，不抄寫或近似改寫其他創作者文案。
+
 產生三平台草稿：
 
 ```text
 使用 $social-browser-publisher，以 fruit-store 的語氣，根據這個主題分別寫 IG、Facebook、Threads 版本。先完整預覽，不要發布。
 ```
+
+草稿會依平台使用自然段落：Instagram 通常分開開場、正文、CTA 與標籤；Facebook 在敘事或觀點轉折處換段；較長 Threads 內容分成 2–4 個閱讀節奏。發佈前會從 composer 重新讀回文字，逐字核對內容與空行。
 
 製作 IG 圖片小卡：
 
@@ -100,6 +114,7 @@ python3 ~/.codex/skills/social-browser-publisher/scripts/select_profile.py --pro
 - 1080×1350 圖卡明確選 4:5，目視確認文字與 footer 沒被切掉。
 - 預設保留原始色彩，不自動加濾鏡。
 - Instagram 可能預設開啟 Facebook 跨發；未授權時選「不要分享此貼文」，不能誤選全域設定。
+- 文案以包含 `\n` 的完整文字一次輸入，發佈前核對段落與空行，避免用 Enter 操作到錯誤 UI。
 - 分享後需看到成功訊息，再到個人頁核對圖片、文案與公開連結。
 
 ## 舊 `social-post` 使用者

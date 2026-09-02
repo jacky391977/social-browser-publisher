@@ -33,7 +33,7 @@ Private user-specific files live outside the installed Skill:
 ~/.config/codex-social-publisher/profiles/<profile-id>/
 ```
 
-Each profile contains `voice-profile.md`, `brand-profile.md`, and `content-plan.md`. Use a separate profile ID for every person or brand. Do not copy these files into the repository, release ZIP, another profile, or another user's chat.
+Each profile contains `voice-profile.md`, `brand-profile.md`, `content-plan.md`, and `trend-log.md`. Use a separate profile ID for every person or brand. Do not copy these files into the repository, release ZIP, another profile, or another user's chat.
 
 Use `scripts/select_profile.py --profile-id <id>` before drafting or publishing for a different user. It changes only the active profile ID and preserves platform destination settings. Still verify the visible account before every publish.
 
@@ -72,4 +72,4 @@ Do not place these in the repository, Skill folder, config, logs, screenshots, o
 - one-time passwords, backup codes, or recovery codes
 - copied browser profile data or login databases
 
-Do not publish or package a user's `voice-profile.md`, `brand-profile.md`, or `content-plan.md`. If `doctor.py` reports a forbidden key, stop publishing. Ask the user to remove that field and rotate the exposed credential if it was real.
+Do not publish or package a user's `voice-profile.md`, `brand-profile.md`, `content-plan.md`, or `trend-log.md`. If `doctor.py` reports a forbidden key, stop publishing. Ask the user to remove that field and rotate the exposed credential if it was real.

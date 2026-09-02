@@ -106,7 +106,7 @@ def profile_permission_errors(config: Any, config_path: Path) -> list[str]:
     dir_mode = stat.S_IMODE(profile_dir.stat().st_mode)
     if dir_mode & 0o077:
         errors.append(f"使用者語氣設定檔目錄權限過寬（目前 {dir_mode:04o}，需要 0700）")
-    for filename in ("voice-profile.md", "brand-profile.md", "content-plan.md"):
+    for filename in ("voice-profile.md", "brand-profile.md", "content-plan.md", "trend-log.md"):
         file_path = profile_dir / filename
         if not file_path.exists():
             continue

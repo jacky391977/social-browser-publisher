@@ -68,6 +68,13 @@ Status: not planned
 
 ## Review notes
 """,
+    "trend-log.md": """# Trend research log
+
+Status: empty
+
+| Research date | Window | Topic | Source URLs | Confidence | Chosen angle | Used/published |
+|---|---|---|---|---|---|---|
+""",
 }
 
 

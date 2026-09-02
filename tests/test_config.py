@@ -45,7 +45,7 @@ class ConfigTests(unittest.TestCase):
             profile_dir, created = init_profile.init_profile("student-a", profiles_root)
             self.assertEqual(
                 sorted(created),
-                ["brand-profile.md", "content-plan.md", "voice-profile.md"],
+                ["brand-profile.md", "content-plan.md", "trend-log.md", "voice-profile.md"],
             )
             self.assertEqual(stat.S_IMODE(profile_dir.stat().st_mode), 0o700)
             for filename in created:
@@ -56,6 +56,7 @@ class ConfigTests(unittest.TestCase):
                 self.assertNotIn("jacky", rendered)
                 self.assertNotIn("yuquan", rendered)
             self.assertIn("Status: untrained", (profile_dir / "voice-profile.md").read_text())
+            self.assertIn("Status: empty", (profile_dir / "trend-log.md").read_text())
 
     def test_profile_init_never_overwrites_existing_user_data(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -66,6 +67,28 @@ class ConfigTests(unittest.TestCase):
             _, created = init_profile.init_profile("student-a", profiles_root)
             self.assertEqual(created, [])
             self.assertEqual(voice_path.read_text(encoding="utf-8"), "USER-CORRECTION")
+
+    def test_existing_profile_migration_adds_only_missing_trend_log(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            profiles_root = Path(temp_dir) / "profiles"
+            profile_dir, _ = init_profile.init_profile("student-a", profiles_root)
+            voice_path = profile_dir / "voice-profile.md"
+            brand_path = profile_dir / "brand-profile.md"
+            plan_path = profile_dir / "content-plan.md"
+            trend_path = profile_dir / "trend-log.md"
+            voice_path.write_text("USER-VOICE", encoding="utf-8")
+            brand_path.write_text("USER-BRAND", encoding="utf-8")
+            plan_path.write_text("USER-PLAN", encoding="utf-8")
+            trend_path.unlink()
+
+            _, created = init_profile.init_profile("student-a", profiles_root)
+
+            self.assertEqual(created, ["trend-log.md"])
+            self.assertEqual(voice_path.read_text(encoding="utf-8"), "USER-VOICE")
+            self.assertEqual(brand_path.read_text(encoding="utf-8"), "USER-BRAND")
+            self.assertEqual(plan_path.read_text(encoding="utf-8"), "USER-PLAN")
+            self.assertIn("Status: empty", trend_path.read_text(encoding="utf-8"))
+            self.assertEqual(stat.S_IMODE(trend_path.stat().st_mode), 0o600)
 
     def test_invalid_profile_id_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp_dir:

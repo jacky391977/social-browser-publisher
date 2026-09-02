@@ -12,6 +12,7 @@ Use the active user's own:
 - available media and offers
 - privacy and topic boundaries
 - recent content and results, when provided
+- recent reviewed topics in the active private `trend-log.md`
 
 Ask only for missing inputs that materially change the plan. Do not assume every user wants daily posting, viral reach, aggressive calls to action, or sales content.
 
@@ -24,6 +25,8 @@ date/slot | platform | purpose | topic | format/media | status | result notes
 ```
 
 Balance a small number of repeatable content purposes such as education, story, product/service, community question, proof/process, and light conversation. Leave rest days when appropriate. Avoid repeating the same narrative angle or visual in adjacent posts.
+
+When the user requests timely topics, run `trend-research.md` first. Put only the user's selected, original angle into the plan; a researched candidate is neither a finished draft nor authorization to publish.
 
 The plan is a draft, not authorization to publish. Every actual batch still needs the confirmation boundary in `SKILL.md`.
 
