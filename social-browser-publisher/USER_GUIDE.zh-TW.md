@@ -1,6 +1,6 @@
 # Social Browser Publisher 學員使用手冊
 
-版本：v1.1.1
+版本：v1.1.2
 
 適用平台：Instagram、Facebook、Threads
 
@@ -122,66 +122,47 @@ Social Browser Publisher 是一個可安裝到 Codex 的社群內容工作 Skill
 4. Instagram、Facebook、Threads 由使用者本人先在 Chrome 登入。
 5. 建議建立獨立 Chrome 使用者，例如 `Codex Social`，讓社群登入與信箱、網銀及其他私人網站分開。
 
-## 5. 安裝 Skill
+## 5. 安裝 Skill（不用終端機）
 
-在終端機執行：
+開啟 Codex，建立一個新對話，將下面整段文字複製並貼上：
 
-```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo jacky391977/social-browser-publisher \
-  --path social-browser-publisher
+```text
+幫我安裝這個 skill，安裝好後教我怎麼設定
+https://github.com/jacky391977/social-browser-publisher/releases/latest
 ```
 
-安裝完成後，重新啟動 Codex，或開啟一個新的對話。
+接著讓 Codex 完成安裝。如果畫面要求重新啟動 Codex，或開啟新對話，照畫面提示操作，再告訴 Codex：「繼續教我設定 Social Browser Publisher」。
 
-GitHub 下載頁：
+學員只需要安裝 `social-browser-publisher`，不需要另外安裝舊 `social-post` 或另一個熱門搜尋 Skill，也不需要自行開啟終端機輸入安裝指令。
 
-https://github.com/jacky391977/social-browser-publisher/releases/tag/v1.1.1
+## 6. 第一次安全設定（交給 Codex 引導）
 
-ZIP 直接下載：
+安裝完成後，把下面整段文字貼到 Codex：
 
-https://github.com/jacky391977/social-browser-publisher/releases/download/v1.1.1/social-browser-publisher-v1.1.1.zip
-
-學員只需安裝 `social-browser-publisher`，不需要另外安裝舊 `social-post` 或另一個熱門搜尋 Skill。
-
-## 6. 第一次安全設定
-
-### 步驟 1：建立本機設定
-
-```bash
-python3 ~/.codex/skills/social-browser-publisher/scripts/init_config.py
+```text
+請使用 $social-browser-publisher 幫我完成第一次安全設定。
+請建立我的私人 profile、引導我填寫 Instagram、Facebook、Threads 的顯示帳號或發佈目的地，並執行 Doctor 安全檢查。
+能由你執行的設定請直接幫我完成，不要叫我開終端機。
+不要要求我提供密碼、驗證碼、Cookie 或 Token。
 ```
 
-這裡只填寫 Chrome 顯示名稱、目前使用者代號，以及預期的 IG／FB／Threads 帳號或目的地名稱。請勿輸入密碼、Token 或 Cookie。
+Codex 會依序協助：
 
-### 步驟 2：建立使用者 profile
+1. 建立只保存非敏感資料的本機設定。
+2. 建立獨立的私人語氣 profile；預設可使用 `default`。
+3. 詢問預期的 IG 帳號、Facebook 個人檔案／粉絲專頁／社團，以及 Threads 帳號顯示名稱。
+4. 執行 Doctor，確認設定格式與私人檔案權限。
+5. 若網站尚未登入，請使用者本人在 Chrome 完成登入或驗證。
 
-```bash
-python3 ~/.codex/skills/social-browser-publisher/scripts/init_profile.py --profile-id default
+看到「Doctor：通過」代表本機設定沒有發現問題。網站登入狀態仍會從 Chrome 可見畫面再次確認。
+
+若同一台電腦管理多個品牌，可以直接對 Codex 說：
+
+```text
+請使用 $social-browser-publisher 幫我新增一個 fruit-store profile，保留現有平台目的地設定，完成後切換到 fruit-store 並執行 Doctor。
 ```
 
-`profile-id` 只能使用小寫英文字母、數字、底線或連字號。例如：
-
-```bash
-python3 ~/.codex/skills/social-browser-publisher/scripts/init_profile.py --profile-id fruit-store
-python3 ~/.codex/skills/social-browser-publisher/scripts/init_profile.py --profile-id bakery-owner
-```
-
-### 步驟 3：選擇目前要使用的 profile
-
-```bash
-python3 ~/.codex/skills/social-browser-publisher/scripts/select_profile.py --profile-id fruit-store
-```
-
-切換 profile 不會清除 IG、FB、Threads 的目的地設定。正式發文前仍會從 Chrome 可見畫面重新核對帳號。
-
-### 步驟 4：執行安全檢查
-
-```bash
-python3 ~/.codex/skills/social-browser-publisher/scripts/doctor.py
-```
-
-看到「Doctor：通過」代表設定檔格式與私人檔案權限沒有發現問題。網站是否已登入，仍要從 Chrome 畫面確認。
+`profile-id` 只能使用小寫英文字母、數字、底線或連字號。切換 profile 不會自動修改平台目的地，正式發文前仍會從 Chrome 可見畫面核對帳號。
 
 ## 7. 上傳圖片前的 Chrome 權限
 
@@ -355,11 +336,7 @@ dry run 可以驗證流程，但不會按下真正建立貼文的最後按鈕。
 
 ### Codex 找不到 Skill
 
-重新啟動 Codex，或開啟新對話，再確認 Skill 安裝目錄是：
-
-```text
-~/.codex/skills/social-browser-publisher/
-```
+先重新啟動 Codex，或開啟新對話，再將第 5 節的安裝文字貼一次，請 Codex 檢查 `social-browser-publisher` 是否已安裝成功。
 
 ### 無法控制 Chrome
 
@@ -375,7 +352,7 @@ dry run 可以驗證流程，但不會按下真正建立貼文的最後按鈕。
 
 ### 顯示「帳號不符」
 
-目前 Chrome 可見帳號和設定的預期目的地不同。請自行在 Chrome 切換到正確帳號，或重新執行 `init_config.py` 修正非敏感的目的地名稱。
+目前 Chrome 可見帳號和設定的預期目的地不同。請自行在 Chrome 切換到正確帳號，或告訴 Codex：「請更新 Social Browser Publisher 的預期發佈帳號，再執行 Doctor。」
 
 ### 語氣不像本人
 
@@ -417,9 +394,9 @@ Social Browser Publisher 適合一般人工頻率的社群內容工作，不適�
 
 ## 19. 建議的新手完整流程
 
-1. 安裝 Skill 並重新啟動 Codex。
+1. 把第 5 節的安裝文字貼到 Codex，讓 Codex 完成安裝與檢查。
 2. 啟用 Chrome 擴充功能，登入要使用的社群帳號。
-3. 執行 `init_config.py`、`init_profile.py`、`select_profile.py`、`doctor.py`。
+3. 把第 6 節的第一次設定文字貼到 Codex，讓 Codex 建立私人 profile 並執行 Doctor。
 4. 提供本人貼文，完成語氣分析與測試草稿修正。
 5. 搜尋指定期間的 5 個熱門候選，選定一個角度。
 6. 產生 IG、Facebook、Threads 三個平台版本並檢查分段。
@@ -434,6 +411,6 @@ Social Browser Publisher 適合一般人工頻率的社群內容工作，不適�
 
 Notion 線上版：https://app.notion.com/p/3cf4e6997823811b9fe8ce35b7b9989c?pvs=204
 
-版本下載：https://github.com/jacky391977/social-browser-publisher/releases/tag/v1.1.1
+版本下載：https://github.com/jacky391977/social-browser-publisher/releases/tag/v1.1.2
 
 授權：MIT License

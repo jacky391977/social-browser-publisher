@@ -32,13 +32,14 @@
 
 需求：Codex、Google Chrome，以及在 **Settings → Computer use** 啟用的 ChatGPT Chrome 擴充功能。
 
-```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo jacky391977/social-browser-publisher \
-  --path social-browser-publisher
+將下面整段文字直接貼到 Codex，不需要自行開啟終端機：
+
+```text
+幫我安裝這個 skill，安裝好後教我怎麼設定
+https://github.com/jacky391977/social-browser-publisher/releases/latest
 ```
 
-安裝後重新啟動 Codex，或開始新的對話。學員只需要安裝這一個 Skill，不需要再另外安裝舊 `social-post`。
+安裝後依 Codex 畫面提示重新啟動或開啟新對話。學員只需要安裝這一個 Skill，不需要再另外安裝舊 `social-post`。
 
 ## 第一次設定
 
@@ -56,24 +57,24 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 
 ### 2. 建立安全設定與獨立使用者檔案
 
-```bash
-python3 ~/.codex/skills/social-browser-publisher/scripts/init_config.py
-python3 ~/.codex/skills/social-browser-publisher/scripts/init_profile.py --profile-id default
-python3 ~/.codex/skills/social-browser-publisher/scripts/select_profile.py --profile-id default
-python3 ~/.codex/skills/social-browser-publisher/scripts/doctor.py
+將下面整段文字貼到 Codex，讓 Codex 直接完成可執行的設定：
+
+```text
+請使用 $social-browser-publisher 幫我完成第一次安全設定。
+請建立我的私人 profile、引導我填寫 Instagram、Facebook、Threads 的顯示帳號或發佈目的地，並執行 Doctor 安全檢查。
+能由你執行的設定請直接幫我完成，不要叫我開終端機。
+不要要求我提供密碼、驗證碼、Cookie 或 Token。
 ```
 
-多位使用者或多品牌請使用不同代號，例如：
+多位使用者或多品牌請使用不同代號，例如可直接對 Codex 說：
 
-```bash
-python3 ~/.codex/skills/social-browser-publisher/scripts/init_profile.py --profile-id bakery-owner
-python3 ~/.codex/skills/social-browser-publisher/scripts/init_profile.py --profile-id fruit-store
-python3 ~/.codex/skills/social-browser-publisher/scripts/select_profile.py --profile-id fruit-store
+```text
+請使用 $social-browser-publisher 幫我新增一個 fruit-store profile，保留現有平台目的地設定，完成後切換到 fruit-store 並執行 Doctor。
 ```
 
-`select_profile.py` 只切換目前語氣／品牌檔，不會清掉 IG、FB、Threads 目的地設定。實際發文前仍會從 Chrome 可見畫面再次核對帳號。
+切換 profile 不會清掉 IG、FB、Threads 目的地設定。實際發文前仍會從 Chrome 可見畫面再次核對帳號。
 
-若從舊版升級，對既有 `profile-id` 再執行一次 `init_profile.py` 即可安全補上 `trend-log.md`；現有語氣、品牌與內容計畫不會被覆寫。
+若從舊版升級，直接請 Codex「重新檢查目前 profile 並補齊缺少的私人設定檔」。現有語氣、品牌與內容計畫不會被覆寫。
 
 ### 3. 用自己的貼文學語氣
 
