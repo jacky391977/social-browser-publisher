@@ -2,6 +2,35 @@
 
 Use this guide for first-time setup, account changes, or doctor checks.
 
+## Install and update without Terminal
+
+For first-time installation, the learner can paste this into Codex:
+
+```text
+幫我安裝這個 skill，安裝好後教我怎麼設定
+https://github.com/jacky391977/social-browser-publisher/releases/latest
+```
+
+For an existing installation, the learner can paste:
+
+```text
+請幫我把這個 skill 更新到最新版，並保留我原本的私人設定
+https://github.com/jacky391977/social-browser-publisher/releases/latest
+```
+
+The `releases/latest` URL follows the newest published GitHub Release. It does not continuously synchronize an installed Skill. A maintainer must push changes and publish a new Release before that URL changes to a new version, and each learner must explicitly request an update for an already-installed copy.
+
+When Codex performs an update:
+
+1. Resolve and install the newest published release using the available Skill installer workflow.
+2. Replace only the installed Skill files. Do not alter `~/.config/codex-social-publisher/`.
+3. Preserve the active profile ID, expected platform destinations, and every existing profile file.
+4. Run the profile initializer only to add missing files or fields; it must never overwrite user-authored profile data.
+5. Run `doctor.py` and report whether the updated Skill and private configuration pass.
+6. If Skill discovery is stale, ask the user to restart Codex or open a new conversation before continuing.
+
+Never describe a local edit, GitHub repository, GitHub Release, and installed learner copy as if they were the same state. Verify each state that matters.
+
 ## Local configuration
 
 Run:

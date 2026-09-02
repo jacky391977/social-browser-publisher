@@ -24,7 +24,7 @@ For learning or changing a voice, read [references/voice-profile.md](references/
 
 Choose only the references needed for the current mode:
 
-- **Setup / doctor:** read [references/setup-and-security.md](references/setup-and-security.md), run the local helpers, and inspect requested platform login state without posting.
+- **Install / update / setup / doctor:** read [references/setup-and-security.md](references/setup-and-security.md), preserve private user data during updates, run the local helpers, and inspect requested platform login state without posting.
 - **Learn / refresh voice:** read [references/voice-profile.md](references/voice-profile.md). Obtain source authorization before browser reading.
 - **Trend / hot-topic research:** read [references/trend-research.md](references/trend-research.md). Current or "recent" claims require live web or explicitly authorized visible-platform research.
 - **Content calendar / strategy:** read [references/content-strategy.md](references/content-strategy.md). Use the active user's goals and results, not universal viral formulas.
@@ -44,6 +44,21 @@ Tell the user which mode is running in one short sentence when it changes what d
 - Use only the requested platform websites: `instagram.com`, `facebook.com`, and `threads.com`/`threads.net`.
 - Keep normal human posting frequency. Do not scrape at scale, auto-like, auto-follow, bulk comment, send unsolicited messages, or bypass platform safeguards.
 - Never claim a topic is currently trending from model memory alone. Record dated sources and uncertainty, then let the user select the angle before drafting.
+
+## Installation and update handling
+
+`https://github.com/jacky391977/social-browser-publisher/releases/latest` always redirects to the newest published GitHub Release. It does not automatically update a copy that is already installed in Codex.
+
+When a user asks to install or update this Skill from that URL:
+
+- Use the available Skill installer workflow directly when possible; do not make a learner use Terminal for steps Codex can safely perform.
+- Treat an update as replacing only the installed `social-browser-publisher` code and bundled documentation.
+- Preserve `~/.config/codex-social-publisher/` in full. Never delete, reset, rename, overwrite, upload, package, or move its config, profiles, voice data, brand data, content plans, trend logs, or destination preferences into the Skill directory.
+- After updating, safely add only newly required profile files or fields, then run `doctor.py`. Existing user-authored content always wins and must not be overwritten by defaults.
+- If Codex still sees the old Skill instructions after installation, ask the user to restart Codex or open a new conversation, then continue setup.
+- Report the installed or updated release when it can be verified. Do not claim that a local edit, Git push, Release, or installed copy updated automatically unless that specific state was checked.
+
+For the exact learner-facing install and update prompts, migration steps, and privacy checks, follow [references/setup-and-security.md](references/setup-and-security.md).
 
 ## Confirmation boundary
 

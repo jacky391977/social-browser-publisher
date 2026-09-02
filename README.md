@@ -41,6 +41,19 @@ https://github.com/jacky391977/social-browser-publisher/releases/latest
 
 安裝後依 Codex 畫面提示重新啟動或開啟新對話。學員只需要安裝這一個 Skill，不需要再另外安裝舊 `social-post`。
 
+## 更新到最新版
+
+`releases/latest` 會自動指向 GitHub 上最新發布的 Release，但已經安裝到 Codex 的 Skill 不會在背景自動升級。需要更新時，將下面整段文字貼到 Codex：
+
+```text
+請幫我把這個 skill 更新到最新版，並保留我原本的私人設定
+https://github.com/jacky391977/social-browser-publisher/releases/latest
+```
+
+Codex 更新時只應替換 Skill 程式與內建文件，並保留 `~/.config/codex-social-publisher/` 內的語氣、品牌、內容計畫、熱門紀錄與平台目的地設定。更新完成後會執行 Doctor 檢查；如仍顯示舊版，重新啟動 Codex 或開啟新對話。
+
+維護者仍需先把修改推送至原 GitHub，並建立新的 Release；`releases/latest` 才會切換到該版本。
+
 ## 第一次設定
 
 ### 1. 開啟 Chrome 本機檔案權限

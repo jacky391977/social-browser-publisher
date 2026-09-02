@@ -1,6 +1,6 @@
 # Social Browser Publisher 學員使用手冊
 
-版本：v1.1.2
+版本：v1.1.3
 
 適用平台：Instagram、Facebook、Threads
 
@@ -134,6 +134,28 @@ https://github.com/jacky391977/social-browser-publisher/releases/latest
 接著讓 Codex 完成安裝。如果畫面要求重新啟動 Codex，或開啟新對話，照畫面提示操作，再告訴 Codex：「繼續教我設定 Social Browser Publisher」。
 
 學員只需要安裝 `social-browser-publisher`，不需要另外安裝舊 `social-post` 或另一個熱門搜尋 Skill，也不需要自行開啟終端機輸入安裝指令。
+
+### 5.1 之後如何更新到最新版
+
+`releases/latest` 會自動指向 GitHub 上最新發布的 Release，但已經安裝到 Codex 的 Skill 不會在背景自動升級。需要更新時，將下面整段文字貼到 Codex：
+
+```text
+請幫我把這個 skill 更新到最新版，並保留我原本的私人設定
+https://github.com/jacky391977/social-browser-publisher/releases/latest
+```
+
+更新時，Codex 只應替換 Skill 程式與內建文件，並保留以下私人資料：
+
+- 使用者語氣與修正紀錄
+- 品牌資料與內容計畫
+- 已使用的熱門主題紀錄
+- Instagram、Facebook、Threads 的預期目的地設定
+
+這些資料位於 `~/.config/codex-social-publisher/`，不在 Skill 安裝資料夾裡。更新完成後，Codex 會補齊新版本需要但仍缺少的檔案或欄位，再執行 Doctor；既有內容不能被預設值覆寫。
+
+如果更新後仍顯示舊版，請重新啟動 Codex 或開啟新對話，再請 Codex 繼續檢查。
+
+> `releases/latest` 不是持續同步功能。維護者仍要先把修改推送到原 GitHub 並建立新的 Release，它才會切換到新版本；每位已安裝的學員也仍需明確要求 Codex 更新。
 
 ## 6. 第一次安全設定（交給 Codex 引導）
 
@@ -411,6 +433,6 @@ Social Browser Publisher 適合一般人工頻率的社群內容工作，不適�
 
 Notion 線上版：https://app.notion.com/p/3cf4e6997823811b9fe8ce35b7b9989c?pvs=204
 
-版本下載：https://github.com/jacky391977/social-browser-publisher/releases/tag/v1.1.2
+版本下載：https://github.com/jacky391977/social-browser-publisher/releases/tag/v1.1.3
 
 授權：MIT License
